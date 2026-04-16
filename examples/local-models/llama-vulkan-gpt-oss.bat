@@ -48,7 +48,6 @@ echo.
   --no-mmap ^
   --api-key local ^
   --jinja ^
-  --logit-bias 200012+0 ^
   --parallel 1 ^
   --cont-batching
 
@@ -64,7 +63,5 @@ pause
 ::   --ctx-size 131072   model native context (reduce to 65536 or 32768 if VRAM limited)
 ::   --jinja             activates Jinja template from the GGUF for tool call formatting;
 ::                       without this, <|channel|> tokens are emitted as raw text
-::   --logit-bias 200012+0  un-suppresses <|call|> token; llama.cpp adds -inf bias to all
-::                       EOG tokens by default, which blocks tool call generation entirely
 ::   --parallel 1        single inference slot for single-user local use
 ::   --cont-batching     allows streaming responses to complete cleanly
