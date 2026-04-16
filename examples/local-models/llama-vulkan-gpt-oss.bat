@@ -47,6 +47,7 @@ echo.
   -fa on ^
   --no-mmap ^
   --api-key local ^
+  --jinja ^
   --parallel 1 ^
   --cont-batching
 
@@ -60,7 +61,7 @@ pause
 ::   -fa on              reduces VRAM significantly, important for 20B
 ::   --no-mmap           more stable on Windows with Vulkan
 ::   --ctx-size 32768    context window size (reduce to 16384 if VRAM limited)
-::   (no --chat-template) uses the template embedded in the GGUF file, required for
-::                       correct <|channel|> tool call parsing with gpt-oss 20b
+::   --jinja             activates Jinja template from the GGUF for tool call formatting;
+::                       without this, <|channel|> tokens are emitted as raw text
 ::   --parallel 1        single inference slot for single-user local use
 ::   --cont-batching     allows streaming responses to complete cleanly
