@@ -15,11 +15,10 @@ start: binding port with default address family
 main: loading model
 srv    load_model: loading model 'C:\models\gpt-oss-20b-mxfp4.gguf'
 common_init_result: fitting params to device memory, for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on
-llama_params_fit_impl: projected to use 14445 MiB of device memory vs. 15401 MiB of free device memory
-llama_params_fit_impl: cannot meet free memory target of 1024 MiB, need to reduce device memory by 68 MiB
-llama_params_fit_impl: context size set by user to 131072 -> no change
-llama_params_fit: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
-[0mllama_params_fit: fitting params to free memory took 0.54 seconds
+llama_params_fit_impl: projected to use 12991 MiB of device memory vs. 15401 MiB of free device memory
+llama_params_fit_impl: will leave 2409 >= 1024 MiB of free device memory, no changes needed
+llama_params_fit: successfully fit params to free device memory
+llama_params_fit: fitting params to free memory took 0.52 seconds
 llama_model_load_from_file_impl: using device Vulkan0 (AMD Radeon RX 7800 XT) (unknown id) - 15401 MiB free
 llama_model_loader: loaded meta data with 35 key-value pairs and 459 tensors from C:\models\gpt-oss-20b-mxfp4.gguf (version GGUF V3 (latest))
 llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
@@ -149,7 +148,7 @@ llama_context: constructing llama_context
 llama_context: n_seq_max     = 1
 llama_context: n_ctx         = 131072
 llama_context: n_ctx_seq     = 131072
-llama_context: n_batch       = 512
+llama_context: n_batch       = 2048
 llama_context: n_ubatch      = 512
 llama_context: causal_attn   = 1
 llama_context: flash_attn    = enabled
@@ -158,24 +157,24 @@ llama_context: freq_base     = 150000.0
 llama_context: freq_scale    = 0.03125
 llama_context: Vulkan_Host  output buffer size =     0.77 MiB
 llama_kv_cache_iswa: creating non-SWA KV cache, size = 131072 cells
-llama_kv_cache:    Vulkan0 KV buffer size =  3072.00 MiB
-llama_kv_cache: size = 3072.00 MiB (131072 cells,  12 layers,  1/1 seqs), K (f16): 1536.00 MiB, V (f16): 1536.00 MiB
-llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 64
-llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 64
+llama_kv_cache:    Vulkan0 KV buffer size =  1632.00 MiB
+llama_kv_cache: size = 1632.00 MiB (131072 cells,  12 layers,  1/1 seqs), K (q8_0):  816.00 MiB, V (q8_0):  816.00 MiB
+llama_kv_cache: attn_rot_k = 1, n_embd_head_k_all = 64
+llama_kv_cache: attn_rot_v = 1, n_embd_head_k_all = 64
 llama_kv_cache_iswa: creating     SWA KV cache, size = 768 cells
-llama_kv_cache:    Vulkan0 KV buffer size =    18.00 MiB
-llama_kv_cache: size =   18.00 MiB (   768 cells,  12 layers,  1/1 seqs), K (f16):    9.00 MiB, V (f16):    9.00 MiB
-llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 64
-llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 64
+llama_kv_cache:    Vulkan0 KV buffer size =     9.56 MiB
+llama_kv_cache: size =    9.56 MiB (   768 cells,  12 layers,  1/1 seqs), K (q8_0):    4.78 MiB, V (q8_0):    4.78 MiB
+llama_kv_cache: attn_rot_k = 1, n_embd_head_k_all = 64
+llama_kv_cache: attn_rot_v = 1, n_embd_head_k_all = 64
 sched_reserve: reserving ...
 sched_reserve: resolving fused Gated Delta Net support:
 sched_reserve: fused Gated Delta Net (autoregressive) enabled
 sched_reserve: fused Gated Delta Net (chunked) enabled
-sched_reserve:    Vulkan0 compute buffer size =   406.52 MiB
-sched_reserve: Vulkan_Host compute buffer size =   268.77 MiB
-sched_reserve: graph nodes  = 1352
+sched_reserve:    Vulkan0 compute buffer size =   400.96 MiB
+sched_reserve: Vulkan_Host compute buffer size =   268.83 MiB
+sched_reserve: graph nodes  = 1640
 sched_reserve: graph splits = 2
-sched_reserve: reserve took 63.42 ms, sched copies = 1
+sched_reserve: reserve took 37.12 ms, sched copies = 1
 common_init_from_params: warming up the model with an empty run - please wait ... (--no-warmup to disable)
 [0msrv    load_model: initializing slots, n_slots = 1
 no implementations specified for speculative decoding
