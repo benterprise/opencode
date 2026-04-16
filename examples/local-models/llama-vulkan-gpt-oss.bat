@@ -10,7 +10,7 @@ set LLAMA_SERVER=C:\path\to\llama-vulkan\llama-server.exe
 set MODEL=C:\path\to\gpt-oss-20b-Q4_K_M.gguf
 
 :: Reduce --ctx-size or --n-gpu-layers if you run out of VRAM
-:: Q4_K_M at 32k ctx needs ~15-16GB VRAM, 16k ctx needs ~12GB VRAM
+:: Model natively supports 131072 ctx; reduce if VRAM limited
 
 if not exist "%LLAMA_SERVER%" (
     echo ERROR: llama-server.exe not found at:
@@ -39,7 +39,7 @@ echo.
   --model "%MODEL%" ^
   --host 127.0.0.1 ^
   --port 8000 ^
-  --ctx-size 32768 ^
+  --ctx-size 131072 ^
   --n-gpu-layers 99 ^
   --threads 8 ^
   --batch-size 512 ^
@@ -48,6 +48,7 @@ echo.
   --no-mmap ^
   --api-key local ^
   --jinja ^
+  --logit-bias 200012+0 ^
   --parallel 1 ^
   --cont-batching
 
@@ -60,8 +61,10 @@ pause
 ::   --n-gpu-layers 99   offload all layers to Vulkan GPU
 ::   -fa on              reduces VRAM significantly, important for 20B
 ::   --no-mmap           more stable on Windows with Vulkan
-::   --ctx-size 32768    context window size (reduce to 16384 if VRAM limited)
+::   --ctx-size 131072   model native context (reduce to 65536 or 32768 if VRAM limited)
 ::   --jinja             activates Jinja template from the GGUF for tool call formatting;
 ::                       without this, <|channel|> tokens are emitted as raw text
+::   --logit-bias 200012+0  un-suppresses <|call|> token; llama.cpp adds -inf bias to all
+::                       EOG tokens by default, which blocks tool call generation entirely
 ::   --parallel 1        single inference slot for single-user local use
 ::   --cont-batching     allows streaming responses to complete cleanly

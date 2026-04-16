@@ -24,7 +24,7 @@
           "temperature": true,
           "reasoning": false,
           "limit": {
-            "context": 32768,
+            "context": 131072,
             "output": 8192
           },
           "options": {
