@@ -350,9 +350,9 @@ export namespace LLM {
           topP: params.topP,
           topK: params.topK,
           providerOptions: ProviderTransform.providerOptions(input.model, params.options),
-          activeTools: Object.keys(tools).filter((x) => x !== "invalid"),
-          tools,
-          toolChoice: input.toolChoice,
+          activeTools: input.model.capabilities.toolcall ? Object.keys(tools).filter((x) => x !== "invalid") : [],
+          tools: input.model.capabilities.toolcall ? tools : {},
+          toolChoice: input.model.capabilities.toolcall ? input.toolChoice : undefined,
           maxOutputTokens: params.maxOutputTokens,
           abortSignal: input.abort,
           headers: {
