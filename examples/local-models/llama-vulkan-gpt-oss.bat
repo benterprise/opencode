@@ -42,10 +42,12 @@ echo.
   --ctx-size 131072 ^
   --n-gpu-layers 99 ^
   --threads 8 ^
-  --batch-size 512 ^
+  --batch-size 2048 ^
   --ubatch-size 512 ^
   -fa on ^
   --no-mmap ^
+  --cache-type-k q8_0 ^
+  --cache-type-v q8_0 ^
   --api-key local ^
   --jinja ^
   --parallel 1 ^
@@ -57,9 +59,12 @@ echo Server exited.
 pause
 
 :: Notes:
-::   --n-gpu-layers 99   offload all layers to Vulkan GPU
-::   -fa on              reduces VRAM significantly, important for 20B
-::   --no-mmap           more stable on Windows with Vulkan
+::   --n-gpu-layers 99      offload all layers to Vulkan GPU
+::   -fa on                 reduces VRAM significantly, important for 20B
+::   --no-mmap              more stable on Windows with Vulkan
+::   --cache-type-k/v q8_0  quantize KV cache: halves its VRAM (3072->1536 MiB at 131k ctx),
+::                          freeing headroom for larger batch size; nearly lossless quality
+::   --batch-size 2048      larger prefill batches = faster prompt processing
 ::   --ctx-size 131072   model native context (reduce to 65536 or 32768 if VRAM limited)
 ::   --jinja             activates Jinja template from the GGUF for tool call formatting;
 ::                       without this, <|channel|> tokens are emitted as raw text
