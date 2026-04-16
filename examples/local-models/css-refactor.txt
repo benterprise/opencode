@@ -1,0 +1,18 @@
+  Session 1 — Analysis only (~5 messages, tiny context footprint):
+  Use Grep to find all CSS section comments and major selector blocks
+  in [file].css. Output a proposed split as a JSON array:
+  [{"file": "typography.css", "startLine": 1, "endLine": 340}, ...]
+  Target 8-12 files under 400 lines each. Output the JSON only,
+  no explanations.
+
+  Grep results are tiny (just matching lines + line numbers). The whole analysis fits in a few thousand tokens. Review the plan and correct it if needed.
+
+  Session 2 — Execution with the plan in hand:
+
+  Paste the confirmed JSON plan into a fresh session and say:
+  Execute this split plan against [file].css. For each entry, read
+  ONLY that line range (use offset and limit params) and write the
+  output file. Process entries one at a time. After all files are
+  created, replace [file].css with @import statements.
+
+  Plan: [paste JSON]
