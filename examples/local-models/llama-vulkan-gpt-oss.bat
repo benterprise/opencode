@@ -44,7 +44,7 @@ echo.
   --threads 8 ^
   --batch-size 512 ^
   --ubatch-size 512 ^
-  --flash-attn ^
+  -fa on ^
   --no-mmap ^
   --api-key local ^
   --chat-template chatml ^
@@ -58,7 +58,7 @@ pause
 
 :: Notes:
 ::   --n-gpu-layers 99   offload all layers to Vulkan GPU
-::   --flash-attn        reduces VRAM significantly, important for 20B
+::   -fa on              reduces VRAM significantly, important for 20B
 ::   --no-mmap           more stable on Windows with Vulkan
 ::   --ctx-size 16384    context window size
 ::   --chat-template     fixes <|channel|> parse errors by applying correct template
