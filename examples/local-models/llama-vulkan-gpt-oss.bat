@@ -47,7 +47,6 @@ echo.
   -fa on ^
   --no-mmap ^
   --api-key local ^
-  --chat-template chatml ^
   --parallel 1 ^
   --cont-batching
 
@@ -61,7 +60,7 @@ pause
 ::   -fa on              reduces VRAM significantly, important for 20B
 ::   --no-mmap           more stable on Windows with Vulkan
 ::   --ctx-size 32768    context window size (reduce to 16384 if VRAM limited)
-::   --chat-template     fixes <|channel|> parse errors by applying correct template
-::                       try omitting this if the model ships its own template in the GGUF
+::   (no --chat-template) uses the template embedded in the GGUF file, required for
+::                       correct <|channel|> tool call parsing with gpt-oss 20b
 ::   --parallel 1        single inference slot for single-user local use
 ::   --cont-batching     allows streaming responses to complete cleanly
