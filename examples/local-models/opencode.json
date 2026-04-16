@@ -8,7 +8,10 @@
         "baseURL": "http://127.0.0.1:8000/v1",
         "apiKey": "local",
         "timeout": false,
-        "chunkTimeout": 120000
+        "chunkTimeout": 120000,
+        "extraBody": {
+          "repeat_penalty": 1.05
+        }
       },
       "models": {
         "gpt-oss-20b": {
@@ -20,6 +23,10 @@
           "limit": {
             "context": 16384,
             "output": 4096
+          },
+          "options": {
+            "temperature": 0.2,
+            "top_p": 0.9
           }
         }
       }
