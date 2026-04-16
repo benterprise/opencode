@@ -10,7 +10,7 @@ set LLAMA_SERVER=C:\path\to\llama-vulkan\llama-server.exe
 set MODEL=C:\path\to\gpt-oss-20b-Q4_K_M.gguf
 
 :: Reduce --ctx-size or --n-gpu-layers if you run out of VRAM
-:: Q4_K_M at 16k ctx needs ~12GB VRAM
+:: Q4_K_M at 32k ctx needs ~15-16GB VRAM, 16k ctx needs ~12GB VRAM
 
 if not exist "%LLAMA_SERVER%" (
     echo ERROR: llama-server.exe not found at:
@@ -39,7 +39,7 @@ echo.
   --model "%MODEL%" ^
   --host 127.0.0.1 ^
   --port 8000 ^
-  --ctx-size 16384 ^
+  --ctx-size 32768 ^
   --n-gpu-layers 99 ^
   --threads 8 ^
   --batch-size 512 ^
@@ -60,7 +60,7 @@ pause
 ::   --n-gpu-layers 99   offload all layers to Vulkan GPU
 ::   -fa on              reduces VRAM significantly, important for 20B
 ::   --no-mmap           more stable on Windows with Vulkan
-::   --ctx-size 16384    context window size
+::   --ctx-size 32768    context window size (reduce to 16384 if VRAM limited)
 ::   --chat-template     fixes <|channel|> parse errors by applying correct template
 ::                       try omitting this if the model ships its own template in the GGUF
 ::   --parallel 1        single inference slot for single-user local use
