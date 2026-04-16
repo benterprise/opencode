@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "local/gpt-oss-20b",
+  "provider": {
+    "local": {
+      "name": "Local llama-vulkan",
+      "options": {
+        "baseURL": "http://127.0.0.1:8000/v1",
+        "apiKey": "local",
+        "timeout": false,
+        "chunkTimeout": 120000
+      },
+      "models": {
+        "gpt-oss-20b": {
+          "name": "GPT-OSS 20B",
+          "tool_call": true,
+          "attachment": false,
+          "temperature": true,
+          "reasoning": false,
+          "limit": {
+            "context": 16384,
+            "output": 4096
+          }
+        }
+      }
+    }
+  }
+}
